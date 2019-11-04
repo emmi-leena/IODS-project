@@ -1,4 +1,14 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 
 # About the project
 
-*Write a short description about the course and add a link to your GitHub repository here. This is an R Markdown (.Rmd) file so you can use R Markdown syntax.*
+"I heard about this course from email that was sent by *doctoral program* coordinator.  I´m hoping to get more familiar with the RStudio and learn how to use state-of-art tools of data sciece to visualise and analyse open data.  Currently I´m a bit exciting about the course and also a bit worried how I will be able to able to follow strict deadlines same time as finalizing my PhD."
+
+
+## The link to my GitHub repository
+https://github.com/emmi-leena/IODS-project/
+
