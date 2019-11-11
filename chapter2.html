@@ -369,176 +369,40 @@ summary {
 <h1>Regression and model validation</h1>
 <div id="reading-and-exploring-structure-and-dimension-of-the-data" class="section level2">
 <h2>Reading and exploring structure and dimension of the data</h2>
-<p>“In this excercise I first read the data (learning2014.csv) that was created in the data wrankling part of the excercise. For this I used <strong>read.csv()</strong>-commmand that reads the data. To explore structure and dimension of the data, I used following <strong>dim(learning2014)</strong> <strong>str(learning2014)</strong> commands. Dimension command showed that data consisted of 166 observations and seven variables. Stucture command showed the structure of the data. Seven variables were <em>Gender, Age, Attitude, Seep, Stra, Surf, Points</em>. Gender consist of two level factor (F=1 or M=2). Age is showed as an years. Attitude, deep, stra and surf are numeric factors. Points -variable indicates the exam points of the person”. Here you can see the data frame</p>
-<pre class="r"><code>read.csv(&quot;learning2014.csv&quot;)</code></pre>
-<pre><code>##       X gender Age Attitude     deep  stra     surf Points
-## 1     1      F  53      3.7 3.583333 3.375 2.583333     25
-## 2     2      M  55      3.1 2.916667 2.750 3.166667     12
-## 3     3      F  49      2.5 3.500000 3.625 2.250000     24
-## 4     4      M  53      3.5 3.500000 3.125 2.250000     10
-## 5     5      M  49      3.7 3.666667 3.625 2.833333     22
-## 6     6      F  38      3.8 4.750000 3.625 2.416667     21
-## 7     7      M  50      3.5 3.833333 2.250 1.916667     21
-## 8     8      F  37      2.9 3.250000 4.000 2.833333     31
-## 9     9      M  37      3.8 4.333333 4.250 2.166667     24
-## 10   10      F  42      2.1 4.000000 3.500 3.000000     26
-## 11   11      M  37      3.9 3.583333 3.625 2.666667     31
-## 12   12      F  34      3.8 3.833333 4.750 2.416667     31
-## 13   13      F  34      2.4 4.250000 3.625 2.250000     23
-## 14   14      F  34      3.0 3.333333 3.500 2.750000     25
-## 15   15      M  35      2.6 4.166667 1.750 2.333333     21
-## 16   16      F  33      4.1 3.666667 3.875 2.333333     31
-## 17   17      F  32      2.6 4.083333 1.375 2.916667     20
-## 18   18      F  44      2.6 3.500000 3.250 2.500000     22
-## 19   19      M  29      1.7 4.083333 3.000 3.750000      9
-## 20   20      F  30      2.7 4.000000 3.750 2.750000     24
-## 21   21      M  27      3.9 3.916667 2.625 2.333333     28
-## 22   22      M  29      3.4 4.000000 2.375 2.416667     30
-## 23   23      F  31      2.7 4.000000 3.625 3.000000     24
-## 24   24      F  37      2.3 3.666667 2.750 2.416667      9
-## 25   25      F  26      3.7 3.666667 1.750 2.833333     26
-## 26   26      F  26      4.4 4.416667 3.250 3.166667     32
-## 27   27      M  30      4.1 3.916667 4.000 3.000000     32
-## 28   28      F  33      3.7 3.750000 3.625 2.000000     33
-## 29   29      F  33      2.5 3.250000 2.875 3.500000     29
-## 30   30      M  28      3.0 3.583333 3.000 3.750000     30
-## 31   31      M  26      3.4 4.916667 1.625 2.500000     19
-## 32   32      F  27      3.2 3.583333 3.250 2.083333     23
-## 33   33      F  25      2.0 2.916667 3.500 2.416667     19
-## 34   34      F  31      2.4 3.666667 3.000 2.583333     12
-## 35   35      M  20      4.2 4.500000 3.250 1.583333     10
-## 36   36      F  39      1.6 4.083333 1.875 2.833333     11
-## 37   37      M  38      3.1 3.833333 4.375 1.833333     20
-## 38   38      M  24      3.8 3.250000 3.625 2.416667     26
-## 39   39      M  26      3.8 2.333333 2.500 3.250000     31
-## 40   40      M  25      3.3 3.333333 1.250 3.416667     20
-## 41   41      F  30      1.7 4.083333 4.000 3.416667     23
-## 42   42      F  25      2.5 2.916667 3.000 3.166667     12
-## 43   43      M  30      3.2 3.333333 2.500 3.500000     24
-## 44   44      F  48      3.5 3.833333 4.875 2.666667     17
-## 45   45      F  24      3.2 3.666667 5.000 2.416667     29
-## 46   46      F  40      4.2 4.666667 4.375 3.583333     23
-## 47   47      M  25      3.1 3.750000 3.250 2.083333     28
-## 48   48      F  23      3.9 3.416667 4.000 3.750000     31
-## 49   49      F  25      1.9 4.166667 3.125 2.916667     23
-## 50   50      F  23      2.1 2.916667 2.500 2.916667     25
-## 51   51      M  27      2.5 4.166667 3.125 2.416667     18
-## 52   52      M  25      3.2 3.583333 3.250 3.000000     19
-## 53   53      M  23      3.2 2.833333 2.125 3.416667     22
-## 54   54      F  23      2.6 4.000000 2.750 2.916667     25
-## 55   55      F  23      2.3 2.916667 2.375 3.250000     21
-## 56   56      F  45      3.8 3.000000 3.125 3.250000      9
-## 57   57      F  22      2.8 4.083333 4.000 2.333333     28
-## 58   58      F  23      3.3 2.916667 4.000 3.250000     25
-## 59   59      M  21      4.8 3.500000 2.250 2.500000     29
-## 60   60      M  21      4.0 4.333333 3.250 1.750000     33
-## 61   61      F  21      4.0 4.250000 3.625 2.250000     33
-## 62   62      F  21      4.7 3.416667 3.625 2.083333     25
-## 63   63      F  26      2.3 3.083333 2.500 2.833333     18
-## 64   64      F  25      3.1 4.583333 1.875 2.833333     22
-## 65   65      F  26      2.7 3.416667 2.000 2.416667     17
-## 66   66      M  21      4.1 3.416667 1.875 2.250000     25
-## 67   67      F  23      3.4 3.416667 4.000 2.833333     28
-## 68   68      F  22      2.5 3.583333 2.875 2.250000     22
-## 69   69      F  22      2.1 1.583333 3.875 1.833333     26
-## 70   70      F  22      1.4 3.333333 2.500 2.916667     11
-## 71   71      F  23      1.9 4.333333 2.750 2.916667     29
-## 72   72      M  22      3.7 4.416667 4.500 2.083333     22
-## 73   73      M  23      3.2 4.833333 3.375 2.333333     21
-## 74   74      M  24      2.8 3.083333 2.625 2.416667     28
-## 75   75      F  22      4.1 3.000000 4.125 2.750000     33
-## 76   76      F  23      2.5 4.083333 2.625 3.250000     16
-## 77   77      M  22      2.8 4.083333 2.250 1.750000     31
-## 78   78      M  20      3.8 3.750000 2.750 2.583333     22
-## 79   79      M  22      3.1 3.083333 3.000 3.333333     31
-## 80   80      M  21      3.5 4.750000 1.625 2.833333     23
-## 81   81      F  22      3.6 4.250000 1.875 2.500000     26
-## 82   82      F  23      2.6 4.166667 3.375 2.416667     12
-## 83   83      M  21      4.4 4.416667 3.750 2.416667     26
-## 84   84      M  22      4.5 3.833333 2.125 2.583333     31
-## 85   85      M  29      3.2 3.333333 2.375 3.000000     19
-## 86   86      F  29      3.9 3.166667 2.750 2.000000     30
-## 87   87      F  21      2.5 3.166667 3.125 3.416667     12
-## 88   88      M  28      3.3 3.833333 3.500 2.833333     17
-## 89   89      F  21      3.3 4.250000 2.625 2.250000     18
-## 90   90      F  30      3.0 3.833333 3.375 2.750000     19
-## 91   91      F  21      2.9 3.666667 2.250 3.916667     21
-## 92   92      M  23      3.3 3.833333 3.000 2.333333     24
-## 93   93      F  21      3.3 3.833333 4.000 2.750000     28
-## 94   94      F  21      3.5 3.833333 3.500 2.750000     17
-## 95   95      F  20      3.6 3.666667 2.625 2.916667     18
-## 96   96      M  22      3.7 4.333333 2.500 2.083333     17
-## 97   97      M  21      4.2 3.750000 3.750 3.666667     23
-## 98   98      M  21      3.2 4.166667 3.625 2.833333     26
-## 99   99      F  20      5.0 4.000000 4.125 3.416667     28
-## 100 100      M  22      4.7 4.000000 4.375 1.583333     31
-## 101 101      F  20      3.6 4.583333 2.625 2.916667     27
-## 102 102      F  20      3.6 3.666667 4.000 3.000000     25
-## 103 103      M  24      2.9 3.666667 2.750 2.916667     23
-## 104 104      F  20      3.5 3.833333 2.750 2.666667     21
-## 105 105      F  19      4.0 2.583333 1.375 3.000000     27
-## 106 106      F  21      3.5 3.500000 2.250 2.750000     28
-## 107 107      F  21      3.2 3.083333 3.625 3.083333     23
-## 108 108      F  22      2.6 4.250000 3.750 2.500000     21
-## 109 109      F  25      2.0 3.166667 4.000 2.333333     25
-## 110 110      F  21      2.7 3.083333 3.125 3.000000     11
-## 111 111      F  22      3.2 4.166667 3.250 3.000000     19
-## 112 112      F  25      3.3 2.250000 2.125 4.000000     24
-## 113 113      F  20      3.9 3.333333 2.875 3.250000     28
-## 114 114      M  24      3.3 3.083333 1.500 3.500000     21
-## 115 115      F  20      3.0 2.750000 2.500 3.500000     24
-## 116 116      M  21      3.7 3.250000 3.250 3.833333     24
-## 117 117      F  20      2.5 4.000000 3.625 2.916667     20
-## 118 118      F  20      2.9 3.583333 3.875 2.166667     19
-## 119 119      M  31      3.9 4.083333 3.875 1.666667     30
-## 120 120      F  20      3.6 4.250000 2.375 2.083333     22
-## 121 121      F  22      2.9 3.416667 3.000 2.833333     16
-## 122 122      F  22      2.1 3.083333 3.375 3.416667     16
-## 123 123      M  21      3.1 3.500000 2.750 3.333333     19
-## 124 124      M  22      4.0 3.666667 4.500 2.583333     30
-## 125 125      F  21      3.1 4.250000 2.625 2.833333     23
-## 126 126      F  21      2.3 4.250000 2.750 3.333333     19
-## 127 127      F  21      2.8 3.833333 3.250 3.000000     18
-## 128 128      F  21      3.7 4.416667 4.125 2.583333     28
-## 129 129      F  20      2.6 3.500000 3.375 2.416667     21
-## 130 130      F  21      2.4 3.583333 2.750 3.583333     19
-## 131 131      F  25      3.0 3.666667 4.125 2.083333     27
-## 132 132      M  21      2.8 2.083333 3.250 4.333333     24
-## 133 133      F  24      2.9 4.250000 2.875 2.666667     21
-## 134 134      F  20      2.4 3.583333 2.875 3.000000     20
-## 135 135      M  21      3.1 4.000000 2.375 2.666667     28
-## 136 136      F  20      1.9 3.333333 3.875 2.166667     12
-## 137 137      F  20      2.0 3.500000 2.125 2.666667     21
-## 138 138      F  18      3.8 3.166667 4.000 2.250000     28
-## 139 139      F  21      3.4 3.583333 3.250 2.666667     31
-## 140 140      F  19      3.7 3.416667 2.625 3.333333     18
-## 141 141      F  21      2.9 4.250000 2.750 3.500000     25
-## 142 142      F  20      2.3 3.250000 4.000 2.750000     19
-## 143 143      M  21      4.1 4.416667 3.000 2.000000     21
-## 144 144      F  20      2.7 3.250000 3.375 2.833333     16
-## 145 145      F  21      3.5 3.916667 3.875 3.500000      7
-## 146 146      F  20      3.4 3.583333 3.250 2.500000     21
-## 147 147      F  18      3.2 4.500000 3.375 3.166667     17
-## 148 148      M  22      3.3 3.583333 4.125 3.083333     22
-## 149 149      F  22      3.3 3.666667 3.500 2.916667     18
-## 150 150      M  24      3.5 2.583333 2.000 3.166667     25
-## 151 151      F  19      3.2 4.166667 3.625 2.500000     24
-## 152 152      F  20      3.1 3.250000 3.375 3.833333     23
-## 153 153      F  20      2.8 4.333333 2.125 2.250000     23
-## 154 154      F  17      1.7 3.916667 4.625 3.416667     26
-## 155 155      M  19      1.9 2.666667 2.500 3.750000     12
-## 156 156      F  20      3.5 3.083333 2.875 3.000000     32
-## 157 157      F  20      2.4 3.750000 2.750 2.583333     22
-## 158 158      F  20      2.1 4.166667 4.000 3.333333     20
-## 159 159      F  20      2.9 4.166667 2.375 2.833333     21
-## 160 160      F  19      1.9 3.250000 3.875 3.000000     23
-## 161 161      F  19      2.0 4.083333 3.375 2.833333     20
-## 162 162      F  22      4.2 2.916667 1.750 3.166667     28
-## 163 163      M  35      4.1 3.833333 3.000 2.750000     31
-## 164 164      F  18      3.7 3.166667 2.625 3.416667     18
-## 165 165      F  19      3.6 3.416667 2.625 3.000000     30
-## 166 166      M  21      1.8 4.083333 3.375 2.666667     19</code></pre>
-<p>##Graphical overview of the data “For generating graphical overview about the data, <strong>pairs()</strong>-command was used first. In the following graph I used fast plotting function that draw all possible scatter plots from the column of a data frame. However, gender was excluded from the plots but it was added there with different colours (M=black, F=red)”</p>
+<p>In this excercise I first read the data (learning2014.csv) that was created in the data wrankling part of the excercise. For this I used <strong>read.csv()</strong>-commmand that reads the data. To explore structure and dimension of the data, I used following <strong>dim(learning2014)</strong> <strong>str(learning2014)</strong> commands. Dimension command showed that data consisted of 166 observations and seven variables. Stucture command showed the structure of the data. Seven variables were <em>Gender, Age, Attitude, Seep, Stra, Surf, Points</em>. Gender consist of two level factor (F=1 or M=2). Age is showed as an years. Attitude, deep, stra and surf are numeric factors. Points -variable indicates the exam points of the person. I used following scripts:</p>
+<p>read.csv(“learning2014.csv”)</p>
+<p>dim(learning2014) str(learning2014)</p>
+</div>
+<div id="graphical-overview-of-the-data" class="section level2">
+<h2>Graphical overview of the data</h2>
+<p>Next I made a graphical overview of the data. For that I used fast plotting (<strong>pairs()</strong>), which draws all possible scater plot from the column of a data frame. Results are then showed in a scatter plot matrix. In this analysis gender is excluded from the plot. However, gender is showed in different colours.I used following script:</p>
+<p>pairs(learning2014 [-1], col = learning2014$gender)</p>
+<p>This fast plotting is however a bit hard to go through. Therefore, I made scatterplot (ggplot) where point variable is compared to attitude. Gender is showed here in red and blue For this I used following script:</p>
+<p>library (ggplot2) library(GGally)</p>
+<p>p1 &lt;- ggplot(learning2014, aes(x = attitude, y = points, col = gender)) p2 &lt;- p1 + geom_point() p3 &lt;- p2 + geom_smooth(method = “lm”) p3</p>
+<p>In addition I did ggpairs-plot p &lt;- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap(“facethist”, bins = 20)))</p>
+</div>
+<div id="summary-of-the-variables" class="section level2">
+<h2>Summary of the variables</h2>
+<p>Next I wanted to have summary of the variables. For this I used following script:</p>
+<p>summary(learning2014)</p>
+<p>Summary and ggplot shows that there were more women (110) than men (56) in a data. Age of the persons were between 17-55 years, mean was 25.51 and median 22.00. In attitude variable values were between 1.400-5.000 (average 3.680, meadian 3.667). In deep questions variable values were between 1.583-4.917 (mean 3.680, median 3.667).In strategic questions variable values were between 1.250-5.000 (mean 3.121, median 3.118). In surface questions variable values were between 1.583-4.333 (mean 2.787, median 2.833).In exam points values were between 7-33 (mean 22.72, median 23.00).</p>
+</div>
+<div id="regression-model" class="section level2">
+<h2>Regression model</h2>
+<p>In regression modeling you can estimate the relationship between dependet variable (target) and one or more independent variables (explanatory variables). If there is more than one explanatory variables, it is called multiple regression. I used exam point as an target variable and explanatory variables were attitude, stra, surf. In this excercise I used following script:</p>
+<p>ggpairs(learning2014, lower = list(combo = wrap(“facethist”, bins = 20))) my_model1 &lt;- lm(points ~ attitude + stra + surf, data = learning2014)</p>
+</div>
+<div id="summary-of-the-fitted-model" class="section level2">
+<h2>Summary of the fitted model</h2>
+<p>summary(my_model1)</p>
+<p>From the data we can see that p value of Stra and surf is less than 0.05, which means that there is no significant differences.Therefore they are deleted from the the variable and model is fitted again without them using following script:</p>
+<p>my_model1.2 &lt;- lm(points ~ attitude, data = learning2014) summary(my_model1.2)</p>
+</div>
+<div id="diagnostic-plots" class="section level2">
+<h2>Diagnostic plots</h2>
+<p>Finally I did diagnostic plots (Residual vs Fitted, Normal Q-Q, Residual vs Leverage) using following script:</p>
+<p>par(mfrow = c(2,2)) plot(my_model1.2, which = c(1,2,5))</p>
 </div>
 </div>
 

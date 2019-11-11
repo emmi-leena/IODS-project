@@ -1,16 +1,58 @@
 # Regression and model validation
 
 ## Reading and exploring structure and dimension of the data
-"In this excercise I first read the data (learning2014.csv) that was created in the data wrankling part of the excercise. For this I used **read.csv()**-commmand that reads the data. To explore structure and dimension of the data, I used following **dim(learning2014)** **str(learning2014)** commands. Dimension command showed that data consisted of 166 observations and seven variables. Stucture command showed the structure of the data. Seven variables were *Gender, Age, Attitude, Seep, Stra, Surf, Points*. Gender consist of two level factor (F=1 or M=2). Age is showed as an years. Attitude, deep, stra and surf are numeric factors. Points -variable indicates the exam points of the person"
+In this excercise I first read the data (learning2014.csv) that was created in the data wrankling part of the excercise. For this I used **read.csv()**-commmand that reads the data. To explore structure and dimension of the data, I used following **dim(learning2014)** **str(learning2014)** commands. Dimension command showed that data consisted of 166 observations and seven variables. Stucture command showed the structure of the data. Seven variables were *Gender, Age, Attitude, Seep, Stra, Surf, Points*. Gender consist of two level factor (F=1 or M=2). Age is showed as an years. Attitude, deep, stra and surf are numeric factors. Points -variable indicates the exam points of the person.  I used following scripts:
 
-##Graphical overview of the data
-"For generating graphical overview about the data, **pairs()**-command was used first. In the following graph I used  fast plotting function that draw all possible scatter plots from the column of a data frame. However, gender was excluded from the plots but it was added there with different colours (M=black, F=red)"  
+read.csv("learning2014.csv")
 
-```{r}
+dim(learning2014)
+str(learning2014)
+
+## Graphical overview of the data
+Next I made a graphical overview of the data. For that I used fast plotting (**pairs()**), which draws all possible scater plot from the column of a data frame. Results are then showed in a scatter plot matrix. In this analysis gender is excluded from the plot. However, gender is showed in different colours.I used following script:
+
 pairs(learning2014 [-1], col = learning2014$gender)
-```
-"This plot is however a bit hard to understand and therefore I made gg-plot about the data:"
 
-```{r}
+This fast plotting is however a bit hard to go through. Therefore, I made scatterplot (ggplot) where point variable is compared to attitude. Gender is showed here in red and blue  For this I used following script: 
+
+library (ggplot2)
+library(GGally)
+
+p1 <- ggplot(learning2014, aes(x = attitude, y = points, col = gender))
+p2 <- p1 + geom_point()
+p3 <- p2 + geom_smooth(method = "lm")
+p3
+
+In addition I did ggpairs-plot
 p <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
-```
+
+## Summary of the variables
+Next I wanted to have summary of the variables. For this I used following script: 
+
+summary(learning2014)
+
+Summary and ggplot shows that there were more women (110) than men (56) in a data. Age of the persons were between 17-55 years, mean was 25.51 and median 22.00. In attitude variable values were between 1.400-5.000 (average 3.680, meadian 3.667). In deep questions variable values were between 1.583-4.917 (mean 3.680, median 3.667).In strategic questions variable values were between 1.250-5.000 (mean 3.121, median 3.118).
+In surface questions variable values were between 1.583-4.333 (mean 2.787, median 2.833).In exam points values were between 7-33 (mean 22.72, median 23.00).
+
+
+## Regression model
+In regression modeling you can estimate the relationship between dependet variable (target) and one or more independent variables (explanatory variables). If there is more than one explanatory variables, it is called multiple regression. I used exam point as an target variable and explanatory variables were attitude, stra, surf. In this excercise I used following script:
+
+ggpairs(learning2014, lower = list(combo = wrap("facethist", bins = 20)))
+my_model1 <- lm(points ~ attitude + stra + surf, data = learning2014)
+
+## Summary of the fitted model
+summary(my_model1)
+
+From the data we can see that p value of Stra and surf is less than   0.05, which means that there is no significant differences.Therefore  they are deleted from the the variable and model is fitted again without them using following script:
+
+my_model1.2 <- lm(points ~ attitude, data = learning2014)
+summary(my_model1.2)
+
+## Diagnostic plots
+Finally I did diagnostic plots (Residual vs Fitted, Normal Q-Q, Residual vs Leverage) using following script:
+
+par(mfrow = c(2,2))
+plot(my_model1.2, which = c(1,2,5))
+ 
+ 
