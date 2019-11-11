@@ -1,7 +1,16 @@
-# Insert chapter 2 title here
+# Regression and model validation
 
-*Describe the work you have done this week and summarize your learning.*
+## Reading and exploring structure and dimension of the data
+"In this excercise I first read the data (learning2014.csv) that was created in the data wrankling part of the excercise. For this I used **read.csv()**-commmand that reads the data. To explore structure and dimension of the data, I used following **dim(learning2014)** **str(learning2014)** commands. Dimension command showed that data consisted of 166 observations and seven variables. Stucture command showed the structure of the data. Seven variables were *Gender, Age, Attitude, Seep, Stra, Surf, Points*. Gender consist of two level factor (F=1 or M=2). Age is showed as an years. Attitude, deep, stra and surf are numeric factors. Points -variable indicates the exam points of the person"
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods.
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using.
+##Graphical overview of the data
+"For generating graphical overview about the data, **pairs()**-command was used first. In the following graph I used  fast plotting function that draw all possible scatter plots from the column of a data frame. However, gender was excluded from the plots but it was added there with different colours (M=black, F=red)"  
+
+```{r}
+pairs(learning2014 [-1], col = learning2014$gender)
+```
+"This plot is however a bit hard to understand and therefore I made gg-plot about the data:"
+
+```{r}
+p <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+```
