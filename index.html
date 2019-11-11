@@ -394,7 +394,7 @@ summary {
 <li><a href="#reading-and-exploring-structure-and-dimension-of-the-data">Reading and exploring structure and dimension of the data</a></li>
 <li><a href="#graphical-overview-of-the-data">Graphical overview of the data</a></li>
 <li><a href="#summary-of-the-variables">Summary of the variables</a></li>
-<li><a href="#regression-model">Regression model</a></li>
+<li><a href="#regression-models">Regression models</a></li>
 <li><a href="#summary-of-the-fitted-model">Summary of the fitted model</a></li>
 <li><a href="#diagnostic-plots">Diagnostic plots</a></li>
 </ul></li>
@@ -434,8 +434,8 @@ summary {
 <p>summary(learning2014)</p>
 <p>Summary and ggplot shows that there were more women (110) than men (56) in a data. Age of the persons were between 17-55 years, mean was 25.51 and median 22.00. In attitude variable values were between 1.400-5.000 (average 3.680, meadian 3.667). In deep questions variable values were between 1.583-4.917 (mean 3.680, median 3.667).In strategic questions variable values were between 1.250-5.000 (mean 3.121, median 3.118). In surface questions variable values were between 1.583-4.333 (mean 2.787, median 2.833).In exam points values were between 7-33 (mean 22.72, median 23.00).</p>
 </div>
-<div id="regression-model" class="section level2">
-<h2>Regression model</h2>
+<div id="regression-models" class="section level2">
+<h2>Regression models</h2>
 <p>In regression modeling you can estimate the relationship between dependet variable (target) and one or more independent variables (explanatory variables). If there is more than one explanatory variables, it is called multiple regression. I used exam point as an target variable and explanatory variables were attitude, stra, surf. In this excercise I used following script:</p>
 <p>ggpairs(learning2014, lower = list(combo = wrap(“facethist”, bins = 20))) my_model1 &lt;- lm(points ~ attitude + stra + surf, data = learning2014)</p>
 </div>

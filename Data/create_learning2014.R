@@ -74,12 +74,11 @@ library(GGally)
 pairs(learning2014 [-1], col = learning2014$gender)
 p <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 p
-
 p1 <- ggplot(learning2014, aes(x = attitude, y = points, col = gender))
 p2 <- p1 + geom_point()
-p2
 p3 <- p2 + geom_smooth(method = "lm")
 p3
+
 
 ##Summary of the variables
 summary(learning2014)

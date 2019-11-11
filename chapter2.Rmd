@@ -35,7 +35,7 @@ Summary and ggplot shows that there were more women (110) than men (56) in a dat
 In surface questions variable values were between 1.583-4.333 (mean 2.787, median 2.833).In exam points values were between 7-33 (mean 22.72, median 23.00).
 
 
-## Regression model
+## Regression models
 In regression modeling you can estimate the relationship between dependet variable (target) and one or more independent variables (explanatory variables). If there is more than one explanatory variables, it is called multiple regression. I used exam point as an target variable and explanatory variables were attitude, stra, surf. In this excercise I used following script:
 
 ggpairs(learning2014, lower = list(combo = wrap("facethist", bins = 20)))
