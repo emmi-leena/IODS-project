@@ -98,3 +98,7 @@ summary(my_model1.2)
 ##Diagnostic plots
 par(mfrow = c(2,2))
 plot(my_model1.2, which = c(1,2,5))
+
+write.csv(learning2014, file = "learning2014.csv")
+read.csv("learning2014.csv")
+
