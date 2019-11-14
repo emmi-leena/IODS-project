@@ -370,6 +370,7 @@ summary {
 <div id="reading-and-exploring-structure-and-dimension-of-the-data" class="section level2">
 <h2>Reading and exploring structure and dimension of the data</h2>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>In this excercise I first read the data (learning2014.csv) that was created in the data wrankling part of the excercise. For this I used <strong>read.csv()</strong>-commmand that reads the data. To explore structure and dimension of the data, I used following <strong>dim(learning2014)</strong> <strong>str(learning2014)</strong> commands. Dimension command showed that data consisted of 166 observations and seven variables. Stucture command showed the structure of the data. Seven variables were <em>Gender, Age, Attitude, Seep, Stra, Surf, Points</em>. Gender consist of two level factor (F=1 or M=2). Age is showed as an years. Attitude, deep, stra and surf are numeric factors. Points -variable indicates the exam points of the person. I used following scripts:</p>
 <p>read.csv(“learning2014.csv”)</p>
 <p>dim(learning2014) str(learning2014)</p>
@@ -404,7 +405,7 @@ summary {
 <h2>Diagnostic plots</h2>
 <p>Finally I did diagnostic plots (Residual vs Fitted, Normal Q-Q, Residual vs Leverage) using following script:</p>
 <p>par(mfrow = c(2,2)) plot(my_model1.2, which = c(1,2,5))</p>
-=======
+
 <p>“In this excercise I first read the data (learning2014.csv) that was created in the data wrankling part of the excercise. For this I used <strong>read.csv()</strong>-commmand that reads the data. To explore structure and dimension of the data, I used following <strong>dim(learning2014)</strong> <strong>str(learning2014)</strong> commands. Dimension command showed that data consisted of 166 observations and seven variables. Stucture command showed the structure of the data. Seven variables were <em>Gender, Age, Attitude, Seep, Stra, Surf, Points</em>. Gender consist of two level factor (F=1 or M=2). Age is showed as an years. Attitude, deep, stra and surf are numeric factors. Points -variable indicates the exam points of the person”. Here you can see the data frame</p>
 <pre class="r"><code>read.csv(&quot;learning2014.csv&quot;)</code></pre>
 <pre><code>##       X gender Age Attitude     deep  stra     surf Points
@@ -575,16 +576,7 @@ summary {
 ## 165 165      F  19      3.6 3.416667 2.625 3.000000     30
 ## 166 166      M  21      1.8 4.083333 3.375 2.666667     19</code></pre>
 <p>##Graphical overview of the data “For generating graphical overview about the data, <strong>pairs()</strong>-command was used first. In the following graph I used fast plotting function that draw all possible scatter plots from the column of a data frame. However, gender was excluded from the plots but it was added there with different colours (M=black, F=red)”</p>
->>>>>>> d1990c26d068e6a384e0548e5fdf0cbe2291a618
-</div>
-</div>
 
-
-
-
-</div>
-
-<script>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
