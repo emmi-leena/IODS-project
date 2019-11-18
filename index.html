@@ -408,7 +408,7 @@ summary {
 <li><a href="#exploration-the-relationship-between-chosen-variables-and-the-binary-highlow-alcohol-consumption-variable-using-logistic-regression">Exploration the relationship between chosen variables and the binary high/low alcohol consumption variable using logistic regression</a></li>
 <li><a href="#to-compute-odds-ratios-or">To compute odds ratios (OR):</a></li>
 <li><a href="#to-compute-confidence-intervals-ci">To compute confidence intervals (CI):</a></li>
-<li><a href="#to-print-out-the-odds-ratios-with-their-confidence">TO print out the odds ratios with their confidence</a></li>
+<li><a href="#to-print-out-the-odds-ratios-with-their-confidence">To print out the odds ratios with their confidence</a></li>
 <li><a href="#fit-the-model">fit the model</a></li>
 <li><a href="#to-predict-the-probability-of-high_use">To predict() the probability of high_use</a></li>
 <li><a href="#use-the-probabilities-to-make-a-prediction-of-high_use">use the probabilities to make a prediction of high_use</a></li>
@@ -670,7 +670,7 @@ summary(m)</code></pre>
 <pre><code>## Waiting for profiling to be done...</code></pre>
 </div>
 <div id="to-print-out-the-odds-ratios-with-their-confidence" class="section level2">
-<h2>TO print out the odds ratios with their confidence</h2>
+<h2>To print out the odds ratios with their confidence</h2>
 <pre class="r"><code>cbind(OR, CI)</code></pre>
 <pre><code>##                      OR        2.5 %     97.5 %
 ## (Intercept) 0.002209765 5.593849e-05 0.07655548
@@ -690,6 +690,7 @@ summary(m)</code></pre>
 <div id="use-the-probabilities-to-make-a-prediction-of-high_use" class="section level2">
 <h2>use the probabilities to make a prediction of high_use</h2>
 <p>alc &lt;- mutate(alc, prediction = probability &gt; 0.5) select(alc, failures, absences, sex, high_use, probability, prediction) %&gt;% tail(10) table(high_use = alc<span class="math inline">\(high_use, prediction = alc\)</span>prediction)</p>
+<p>EMMI</p>
 <hr />
 </div>
 </div>
