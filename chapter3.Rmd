@@ -1,0 +1,116 @@
+---
+title: "chapter3"
+author: "Emmi-Leena Ihantola"
+date: "18 11 2019"
+output: html_document
+---
+# Analysis
+
+## Reading of the data
+
+read.csv ("alc.csv")
+
+## structure and dimension of the data:
+colnames(alc)
+str(alc)
+dim(alc)
+
+Data is consisted of two joined datasets where students achievement in secondary education of two Portuguese schools are explained. Two datasets are provided regarding the performance in two distinct subjects. Data consist of 382 objectives and 35 variables.
+
+## Names of variables:
+colnames(alc)
+
+## FOllowing variables were compared to high/low alcohol consumption
+Sex, failures, goout, absences
+
+## Personal hypothesis behind these chosen variables
+Sex: There are more men than women that use alcohol in high consumption
+age: Students that have high number of past class failures are using more alcohol
+goout: Students that go out with friends have high consumption of alcohol
+health: Students that have high alcohol consumption have lower health status
+
+## Numeral exploration of the distributions of chosen variables and their relationship with alcohol consumption
+
+library(ggplot2)
+alc %>% group_by(sex, high_use) %>% summarise(count = n())
+
+This data shows that most of the men and womens alcohol consumption is on low level. However, more men are using alcohol high level than women. Therefore my intial hypothesis was partially right.
+ 
+alc %>% group_by(failures, high_use) %>% summarise(count = n()) 
+
+alc %>% group_by(goout, high_use) %>% summarise(count = n())
+
+alc %>% group_by(health, high_use) %>% summarise(count = n())
+
+## Graphical exploration of the distributions of chosen variables and their relationship with alcohol consumption
+
+## Alcohol use vs. sex
+g1 <- ggplot(alc, aes(x = sex, y = alc_use))
+g1 + geom_boxplot() + ylab("alcohol usage")             
+                     
+## Alcohol use vs. age
+
+g2 <- ggplot(alc, aes(x = high_use, y = age))
+g2 + geom_boxplot()+ ylab("ages")
+
+## Alcohol use vs. goout
+
+g2 <- ggplot(alc, aes(x = high_use, y = goout))
+g2 + geom_boxplot()+ ylab("go out")
+
+# Alcohol use vs. health
+
+g2 <- ggplot(alc, aes(x = high_use, y = health))
+g2 + geom_boxplot()+ ylab("health")
+
+## Logistic regression
+
+m <- glm(high_use ~ sex + age + goout + health, data = alc, family = "binomial")
+summary(m)
+coef (m)
+
+## To compute odds ratios (OR):
+OR <- coef(m) %>% exp
+
+## To compute confidence intervals (CI):
+CI <- confint(m) %>% exp
+
+## TO print out the odds ratios with their confidence intervals
+cbind(OR, CI)
+
+## fit the model
+m <- glm(high_use ~ failures + absences + sex, data = alc, family = "binomial")
+
+## To predict() the probability of high_use
+probabilities <- predict(m, type = "response")
+alc <- mutate(alc, probability = probabilities)
+
+## use the probabilities to make a prediction of high_use
+alc <- mutate(alc, prediction = probability > 0.5)
+select(alc, failures, absences, sex, high_use, probability, prediction) %>% tail(10)
+table(high_use = alc$high_use, prediction = alc$prediction)
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
