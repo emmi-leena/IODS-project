@@ -61,7 +61,7 @@ read.csv("alc.csv")
 
 # Reading of the data
 
-read.csv ("alc.csv")
+alc <-read.table("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/alc.txt", sep = ",", header=TRUE)
 
 # structure and dimension of the data:
 colnames(alc)
