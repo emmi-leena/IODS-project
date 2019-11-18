@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Emmi-Leena Ihantola" />
+<meta name="author" content="Emmi Ihantola" />
 
 
 <title>IODS course project</title>
@@ -381,7 +381,7 @@ summary {
 
 
 <h1 class="title toc-ignore">IODS course project</h1>
-<h4 class="author">Emmi-Leena Ihantola</h4>
+<h4 class="author">Emmi Ihantola</h4>
 
 </div>
 
@@ -400,7 +400,7 @@ summary {
 </ul></li>
 <li><a href="#analysis-of-3rd-excercise">Analysis of 3rd excercise</a><ul>
 <li><a href="#names-of-variables">Names of variables:</a></li>
-<li><a href="#following-variables-were-compared-to-highlow-alcohol-consumption">FOllowing variables were compared to high/low alcohol consumption</a></li>
+<li><a href="#following-variables-were-compared-to-highlow-alcohol-consumption">Following variables were compared to high/low alcohol consumption</a></li>
 <li><a href="#personal-hypothesis-behind-these-chosen-variables">Personal hypothesis behind these chosen variables</a></li>
 <li><a href="#numeral-and-graphical-exploration-of-the-distributions-of-chosen-variables-and-their-relationship-with-alcohol-consumption">Numeral and graphical exploration of the distributions of chosen variables and their relationship with alcohol consumption</a></li>
 </ul></li>
@@ -411,7 +411,6 @@ summary {
 <li><a href="#to-print-out-the-odds-ratios-with-their-confidence">To print out the odds ratios with their confidence</a></li>
 <li><a href="#fit-the-model">fit the model</a></li>
 <li><a href="#to-predict-the-probability-of-high_use">To predict() the probability of high_use</a></li>
-<li><a href="#use-the-probabilities-to-make-a-prediction-of-high_use">use the probabilities to make a prediction of high_use</a></li>
 </ul></li>
 </ul>
 </div>
@@ -527,12 +526,15 @@ summary {
 ## [31] &quot;G1&quot;         &quot;G2&quot;         &quot;G3&quot;         &quot;alc_use&quot;    &quot;high_use&quot;</code></pre>
 </div>
 <div id="following-variables-were-compared-to-highlow-alcohol-consumption" class="section level2">
-<h2>FOllowing variables were compared to high/low alcohol consumption</h2>
+<h2>Following variables were compared to high/low alcohol consumption</h2>
 <p>Sex, failures, goout, absences</p>
 </div>
 <div id="personal-hypothesis-behind-these-chosen-variables" class="section level2">
 <h2>Personal hypothesis behind these chosen variables</h2>
-<p>Sex: There are more men than women that use alcohol in high consumption age: Students that are older use more alcohol than younger students goout: Students that go out with friends have high consumption of alcohol health: Students that have high alcohol consumption have lower health status</p>
+<p>Sex: There are more men than women that use alcohol in high consumption</p>
+<p>age: Students that are older use more alcohol than younger students</p>
+<p>goout: Students that go out with friends have high consumption of alcohol</p>
+<p>health: Students that have high alcohol consumption have lower health status</p>
 </div>
 <div id="numeral-and-graphical-exploration-of-the-distributions-of-chosen-variables-and-their-relationship-with-alcohol-consumption" class="section level2">
 <h2>Numeral and graphical exploration of the distributions of chosen variables and their relationship with alcohol consumption</h2>
@@ -681,16 +683,30 @@ summary(m)</code></pre>
 </div>
 <div id="fit-the-model" class="section level2">
 <h2>fit the model</h2>
-<p>m &lt;- glm(high_use ~ failures + absences + sex, data = alc, family = “binomial”)</p>
+<pre class="r"><code>m &lt;- glm(high_use ~ failures + absences + sex, data = alc, family = &quot;binomial&quot;)</code></pre>
 </div>
 <div id="to-predict-the-probability-of-high_use" class="section level2">
 <h2>To predict() the probability of high_use</h2>
-<p>probabilities &lt;- predict(m, type = “response”) alc &lt;- mutate(alc, probability = probabilities)</p>
-</div>
-<div id="use-the-probabilities-to-make-a-prediction-of-high_use" class="section level2">
-<h2>use the probabilities to make a prediction of high_use</h2>
-<p>alc &lt;- mutate(alc, prediction = probability &gt; 0.5) select(alc, failures, absences, sex, high_use, probability, prediction) %&gt;% tail(10) table(high_use = alc<span class="math inline">\(high_use, prediction = alc\)</span>prediction)</p>
-<p>EMM</p>
+<pre class="r"><code>probabilities &lt;- predict(m, type = &quot;response&quot;)
+alc &lt;- mutate(alc, probability = probabilities)
+alc &lt;- mutate(alc, prediction = probability &gt; 0.5)
+select(alc, failures, absences, sex, high_use, probability, prediction) %&gt;% tail(10)</code></pre>
+<pre><code>##     failures absences sex high_use probability prediction
+## 373        1        0   M    FALSE   0.3633449      FALSE
+## 374        1       14   M     TRUE   0.6130701       TRUE
+## 375        0        2   F    FALSE   0.1408685      FALSE
+## 376        0        7   F    FALSE   0.1910175      FALSE
+## 377        1        0   F    FALSE   0.1751799      FALSE
+## 378        0        0   F    FALSE   0.1241213      FALSE
+## 379        1        0   F    FALSE   0.1751799      FALSE
+## 380        1        0   F    FALSE   0.1751799      FALSE
+## 381        0        3   M     TRUE   0.3215447      FALSE
+## 382        0        0   M     TRUE   0.2757800      FALSE</code></pre>
+<pre class="r"><code>table(high_use = alc$high_use, prediction = alc$prediction)</code></pre>
+<pre><code>##         prediction
+## high_use FALSE TRUE
+##    FALSE   258   12
+##    TRUE     86   26</code></pre>
 <hr />
 </div>
 </div>
