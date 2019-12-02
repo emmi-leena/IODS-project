@@ -1,46 +1,30 @@
-#Data wrankling (Excercise 4)
+#Data wrankling (Excercise 5)
 #Emmi-Leena Ihantola
-#25.11.2019
+#2.12.2019
 
 
-#Reading of "Human development" and "Gender inequality"
-hd <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human_development.csv", stringsAsFactors = F)
-gii <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/gender_inequality.csv", stringsAsFactors = F, na.strings = "..")
+
+#Loading of human data
+human <- read.table ("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human1.txt", sep  =",", header = T)
+
 
 #Structure and dimension of the data
-str(hd)
-str(gii)
-dim(hd)
-dim(gii)
+str(human)
+dim(human)
+colnames(human)
 
-#Human development data consisted of 195 observations and 8 variables.
-#Gender inequality data consisted 195 observations and 10 variables.
+#This data consist of 19 variables and 195 observations. The data includes following data about humand development and gender inequality.
 
+#Mutation of the data by transfroiming the Gross National Income (GNI) variable to numeric using string manipulations
+library(stringr)
+str(human$GNI)
+str_replace(human$GNI, pattern=",", replace ="") %>% as.numeric
 
-#Summaries of the variables
-summary(hd)
-summary(gii)
+#Exclution of unneeded variables
+keep <- c("Country", "Edu2.FM", "Labo.FM", "Life.Exp", "Edu.Exp", "GNI", "Mat.Mor", "Ado.Birth", "Parli.F")
 
-#Renaming of variables
-names(hd)
-names(hd)[1]<- "HDI_rank"
-names(hd)[2]<- "count_hdi"
-names(hd)[3]<- "HDI_index"
-names(hd)[4]<- "life_expect"
-names(hd)[5]<- "expect_y_edu"
-names(hd)[6]<- "mean_y_edu"
-names(hd)[7]<- "GNI"
-names(hd)[8]<- "GNI-HDIrank"
+#Deletion of all rows with missing values
+human_ <- filter(human, complete.cases(human))
+human_
 
-names(gii)
-names(gii)[1]<- "GII_rank"
-names(gii)[2]<- "count_gii"
-names(gii)[3]<- "gend_inequal_index"
-names(gii)[4]<- "mom_mortal_ratio"
-names(gii)[5]<- "adol_birth_rate"
-names(gii)[6]<- "%_represten_parl"
-names(gii)[7]<- "m_2nd_edu"
-names(gii)[8]<- "f_2nd_edu"
-names(gii)[9]<- "f_labour_participation"
-names(gii)[10]<- "m_labour_participation" 
 
